@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lehi 41st Ward — Deacons Quorum 2026 Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:   #1a2744;
+      --navy-mid: #243257;
+      --gold:   #c8973a;
+      --gold-lt:#e6b86a;
+      --cream:  #f7f3ec;
+      --stone:  #e8e0d4;
+      --muted:  #8a8178;
+      --white:  #ffffff;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --shadow-card: 0 2px 12px rgba(26,39,68,.10);
+      --shadow-lift: 0 6px 24px rgba(26,39,68,.16);
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', sans-serif;
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 40px;
+      --spacing-2xl: 64px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--navy);
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .hero {
+      background: var(--navy);
+      color: var(--white);
+      padding: var(--spacing-xl) var(--spacing-md) var(--spacing-xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 110%, rgba(200,151,58,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 20%, rgba(200,151,58,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      margin-bottom: var(--spacing-sm);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 7vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: var(--spacing-xs);
+    }
+    .hero-sub {
+      font-size: .85rem;
+      color: rgba(255,255,255,.65);
+      margin-top: var(--spacing-sm);
+      max-width: 340px;
+      margin-inline: auto;
+    }
+    .gold-rule {
+      width: 48px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin: var(--spacing-md) auto;
+    }
+    .times-strip {
+      background: var(--gold);
+      color: var(--navy);
+      padding: var(--spacing-md) var(--spacing-md);
+    }
+    .times-strip-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing-sm);
+    }
+    @media (min-width: 480px) { .times-strip-inner { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 700px) { .times-strip-inner { grid-template-columns: repeat(3, 1fr); } }
+    .time-item { display: flex; align-items: flex-start; gap: 10px; }
+    .time-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+    .time-label { font-size: .72rem; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; opacity: .75; margin-bottom: 1px; }
+    .time-value { font-size: .82rem; font-weight: 500; line-height: 1.4; }
+    .main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-md) var(--spacing-2xl);
+    }
+    .month-section { margin-bottom: var(--spacing-xl); }
+    .month-header { display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-md); }
+    .month-name { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--navy); }
+    .month-line { flex: 1; height: 1px; background: var(--stone); }
+    .event-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border-left: 3px solid transparent;
+      box-shadow: var(--shadow-card);
+      padding: var(--spacing-md) var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: var(--spacing-md);
+      align-items: start;
+      transition: box-shadow .18s, transform .18s;
+    }
+    .event-card:hover { box-shadow: var(--shadow-lift); transform: translateY(-1px); }
+    .event-card.cat-holiday { border-color: #6c9f6c; }
+    .event-card.cat-ward    { border-color: var(--gold); }
+    .event-card.cat-stake   { border-color: #5b82bf; }
+    .event-card.cat-church  { border-color: #9b6cbf; }
+    .event-card[data-past] { opacity: 0.45; filter: grayscale(60%); border-left-color: #ccc !important; box-shadow: none; pointer-events: none; }
+    .event-card[data-past] .event-title { text-decoration: line-through; text-decoration-color: var(--muted); text-decoration-thickness: 1.5px; }
+    .event-card[data-past] .date-badge { background: #ececec !important; }
+    .event-card[data-past] .badge-num,
+    .event-card[data-past] .badge-range,
+    .event-card[data-past] .badge-day { color: var(--muted) !important; }
+    .date-badge { background: var(--cream); border-radius: var(--radius-sm); text-align: center; padding: 6px 4px; flex-shrink: 0; }
+    .event-card.cat-holiday .date-badge { background: #eef5ee; }
+    .event-card.cat-ward    .date-badge { background: #fdf6ec; }
+    .event-card.cat-stake   .date-badge { background: #eef1f9; }
+    .event-card.cat-church  .date-badge { background: #f5eef9; }
+    .badge-day { font-size: .6rem; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); display: block; }
+    .badge-num { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; line-height: 1; color: var(--navy); display: block; }
+    .badge-range { font-family: var(--font-display); font-size: .72rem; font-weight: 700; line-height: 1.1; color: var(--navy); display: block; padding: 0 2px; }
+    .event-title { font-size: .9rem; font-weight: 500; color: var(--navy); line-height: 1.35; margin-bottom: 2px; }
+    .event-meta { display: flex; align-items: center; gap: var(--spacing-sm); flex-wrap: wrap; margin-top: 4px; }
+    .event-tag { font-size: .62rem; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
+    .tag-holiday { background: #d4edd4; color: #2d6b2d; }
+    .tag-ward    { background: #fde8c0; color: #7a5010; }
+    .tag-stake   { background: #dde6f5; color: #2d4a8a; }
+    .tag-church  { background: #ecdcf5; color: #5e2d8a; }
+    .event-note { font-size: .75rem; color: var(--muted); margin-top: 2px; font-style: italic; }
+    .legend {
+      display: flex; flex-wrap: wrap; gap: var(--spacing-sm) var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+      padding: var(--spacing-md);
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+    }
+    .legend-item { display: flex; align-items: center; gap: 7px; font-size: .75rem; font-weight: 500; color: var(--navy); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.5);
+      text-align: center;
+      padding: var(--spacing-lg) var(--spacing-md);
+      font-size: .72rem;
+      letter-spacing: .04em;
+    }
+    footer strong { color: var(--gold-lt); }
+
+    /* ── QUICK LINKS SECTION ─────────────────────────────── */
+    .quick-links-section {
+      margin-bottom: var(--spacing-xl);
+    }
+    .quick-links-label {
+      font-family: var(--font-body);
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: var(--spacing-md);
+    }
+    .quick-links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-sm);
+    }
+    @media (min-width: 560px) {
+      .quick-links-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .quick-link-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: var(--spacing-md) var(--spacing-sm);
+      background: var(--white);
+      border: 1.5px solid var(--stone);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      text-decoration: none;
+      color: var(--navy);
+      font-family: var(--font-body);
+      font-size: .75rem;
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.3;
+      cursor: pointer;
+      transition: box-shadow .18s, transform .18s, border-color .18s, background .18s;
+      position: relative;
+      overflow: hidden;
+    }
+    .quick-link-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .22s ease;
+    }
+    .quick-link-btn:hover {
+      box-shadow: var(--shadow-lift);
+      transform: translateY(-2px);
+      border-color: var(--gold-lt);
+    }
+    .quick-link-btn:hover::before { transform: scaleX(1); }
+    .quick-link-btn:active { transform: translateY(0); box-shadow: var(--shadow-card); }
+    .ql-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      background: var(--cream);
+      transition: background .18s;
+    }
+    .quick-link-btn:hover .ql-icon { background: #fdf6ec; }
+    .ql-label { color: var(--navy); }
+
+    /* ── GOALS SECTION ──────────────────────────────────── */
+    .goals-section { margin-bottom: var(--spacing-xl); }
+    .goals-section-label { font-family: var(--font-body); font-size: .68rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: var(--spacing-md); }
+    .goals-grid { display: grid; grid-template-columns: 1fr; gap: var(--spacing-md); }
+    @media (min-width: 480px) { .goals-grid { grid-template-columns: 1fr 1fr; } }
+    .goal-card { background: var(--white); border-radius: var(--radius-md); border-top: 3px solid transparent; box-shadow: var(--shadow-card); overflow: hidden; transition: box-shadow .18s, transform .18s; }
+    .goal-card:hover { box-shadow: var(--shadow-lift); transform: translateY(-2px); }
+    .goal-spiritual   { border-top-color: #9b6cbf; }
+    .goal-intellectual{ border-top-color: #5b82bf; }
+    .goal-physical    { border-top-color: #6c9f6c; }
+    .goal-social      { border-top-color: var(--gold); }
+    .goal-card-header { display: flex; align-items: center; gap: 9px; padding: 10px var(--spacing-md); }
+    .goal-spiritual   .goal-card-header { background: #f5eef9; }
+    .goal-intellectual > .goal-card-header { background: #eef1f9; }
+    .goal-physical    .goal-card-header { background: #eef5ee; }
+    .goal-social      .goal-card-header { background: #fdf6ec; }
+    .goal-icon { font-size: 1.1rem; line-height: 1; }
+    .goal-title { font-family: var(--font-display); font-size: .88rem; font-weight: 700; color: var(--navy); letter-spacing: .02em; }
+    .goal-count { margin-left: auto; font-size: .65rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+    .goal-spiritual   .goal-count { background: #ecdcf5; color: #5e2d8a; }
+    .goal-intellectual .goal-count{ background: #dde6f5; color: #2d4a8a; }
+    .goal-physical    .goal-count { background: #d4edd4; color: #2d6b2d; }
+    .goal-social      .goal-count { background: #fde8c0; color: #7a5010; }
+    .goal-list { list-style: none; padding: var(--spacing-xs) var(--spacing-md) var(--spacing-md); }
+    .goal-list li { position: relative; padding: 7px 0 7px 20px; font-size: .82rem; color: var(--navy); border-bottom: 1px solid var(--stone); line-height: 1.45; }
+    .goal-list li:last-child { border-bottom: none; }
+    .goal-list li::before { content: '›'; position: absolute; left: 3px; top: 6px; font-size: 1.1rem; font-weight: 700; line-height: 1; }
+    .goal-spiritual   .goal-list li::before { color: #9b6cbf; }
+    .goal-intellectual .goal-list li::before{ color: #5b82bf; }
+    .goal-physical    .goal-list li::before { color: #6c9f6c; }
+    .goal-social      .goal-list li::before { color: var(--gold); }
+    .section-divider { display: flex; align-items: center; gap: var(--spacing-md); margin: var(--spacing-xl) 0; }
+    .section-divider-line { flex: 1; height: 1px; background: var(--stone); }
+    .section-divider-label { font-size: .68rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .event-card[data-past] {
+  opacity: 0.45;
+  filter: grayscale(60%);
+}
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="hero-eyebrow">Lehi Utah 3rd Stake</p>
+  <h1>Lehi 41st Ward - Deacons Quorum 2026 Calendar</h1>
+  <div class="gold-rule"></div>
+  <p style="font-family:var(--font-display);font-size:1.1rem;color:var(--gold-lt);font-weight:600;">2026 Annual Calendar</p>
+  <p class="hero-sub">All dates tentative unless otherwise confirmed. Watch for updates from your bishopric.</p>
+</header>
+
+<section class="times-strip">
+  <div class="times-strip-inner">
+    <div class="time-item"><span class="time-icon">⛪</span><div><div class="time-label">Sacrament</div><div class="time-value">Sundays · 10:30 am</div></div></div>
+    <div class="time-item"><span class="time-icon">📖</span><div><div class="time-label">Sunday School / Classes</div><div class="time-value">11:30 am · 1st &amp; 3rd Sun</div></div></div>
+    <div class="time-item"><span class="time-icon">🤝</span><div><div class="time-label">Priesthood / RS</div><div class="time-value">11:30 am · 2nd &amp; 4th Sun</div></div></div>
+    <div class="time-item"><span class="time-icon">🏋️</span><div><div class="time-label">Mutual Nights</div><div class="time-value">Wednesdays · 7:00 pm</div></div></div>
+    <div class="time-item"><span class="time-icon">👥</span><div><div class="time-label">Ward Youth Council Meeting</div><div class="time-value">3rd Sun · 12:30 pm</div></div></div>
+    <div class="time-item"><span class="time-icon">📋</span><div><div class="time-label">Deacons Quorum Presidency Meeting</div><div class="time-value">2nd, 3rd &amp; 4th Sun · 9:45 am - 10:15 am (except for Mothers Sunday, Fathers Sunday, Ward, Stake and General Conference Sundays, Christmas Day</div></div></div>
+  </div>
+</section>
+
+<main class="main">
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#6c9f6c"></span>Public Holiday</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--gold)"></span>Ward Event</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#5b82bf"></span>Stake Event</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#9b6cbf"></span>Church-Wide</div>
+  </div>
+
+  <!-- ── QUICK LINKS ─────────────────────────────────────── -->
+  <div class="quick-links-section">
+    <p class="quick-links-label">Camp Resources &amp; References</p>
+    <div class="quick-links-grid">
+
+      <a class="quick-link-btn" href="https://bulawebops.github.io/deacons/camp-gear-checklist.html">
+        <div class="ql-icon">⛺</div>
+        <span class="ql-label">Ward Gear Checklist</span>
+      </a>
+
+      <a class="quick-link-btn" href="https://bulawebops.github.io/camp-checklist/">
+        <div class="ql-icon">🎒</div>
+        <span class="ql-label">Youth Gear Checklist</span>
+      </a>
+
+      <a class="quick-link-btn" href="https://bulawebops.github.io/deacons/camp-shopping-tracker.html">
+        <div class="ql-icon">🛒</div>
+        <span class="ql-label">Ward Gear Shopping List</span>
+      </a>
+
+      <a class="quick-link-btn" href="https://www.churchofjesuschrist.org/study/manual/general-handbook" target="_blank" rel="noopener">
+        <div class="ql-icon">📖</div>
+        <span class="ql-label">Church Handbook</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ── QUARTERLY GOALS ─────────────────────────────────── -->
+  <div class="goals-section">
+    <p class="goals-section-label">2026 Quarterly Goals (April, May, June, July)</p>
+    <div class="goals-grid">
+      <div class="goal-card goal-spiritual">
+        <div class="goal-card-header"><span class="goal-icon">🙏</span><span class="goal-title">Spiritual</span><span class="goal-count">2 goals</span></div>
+        <ul class="goal-list">
+          <li>Quorum Monthly Temple Baptisms</li>
+          <li>Prepare 5 Family Male Names (your own or ward members) take to the temple</li>
+        </ul>
+      </div>
+      <div class="goal-card goal-intellectual">
+        <div class="goal-card-header"><span class="goal-icon">📚</span><span class="goal-title">Intellectual</span><span class="goal-count">2 goals</span></div>
+        <ul class="goal-list">
+          <li>Camp Cooking Classes</li>
+          <li>Sunset Morning Breakfast Traverse Mountain</li>
+        </ul>
+      </div>
+      <div class="goal-card goal-physical">
+        <div class="goal-card-header"><span class="goal-icon">🥾</span><span class="goal-title">Physical</span><span class="goal-count">2 goals</span></div>
+        <ul class="goal-list">
+          <li>Lehi Utah 3rd Stake Camp (Jun 29–Jul 2) @ Cobble Creek Camp, Utah</li>
+          <li>Traverse Mountain Hike</li>
+        </ul>
+      </div>
+      <div class="goal-card goal-social">
+        <div class="goal-card-header"><span class="goal-icon">🤝</span><span class="goal-title">Social</span><span class="goal-count">2 goals</span></div>
+        <ul class="goal-list">
+          <li>Camp Fire Snack, Songs and Game Night</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider">
+    <span class="section-divider-line"></span>
+    <span class="section-divider-label">2026 Calendar</span>
+    <span class="section-divider-line"></span>
+  </div>
+
+  <!-- ── APRIL ── -->
+  <!--
+  <div class="month-section">
+    <div class="month-header"><span class="month-name">April</span><span class="month-line"></span></div>
+    <div class="event-card cat-ward" data-past><div class="date-badge"><span class="badge-range">APR</span></div><div><div class="event-title">Combined Mutual Night - Skyridge Boys Volleyball Game 6pm</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div><div class="event-note">Refreshments provided - Pizza</div></div></div>
+    <div class="event-card cat-church" data-past><div class="date-badge"><span class="badge-range">Apr 4–5</span></div><div><div class="event-title">General Conference — April</div><div class="event-meta"><span class="event-tag tag-church">Church-Wide</span></div></div></div>
+    <div class="event-card cat-ward" data-past><div class="date-badge"><span class="badge-range">Apr 12 or 19</span></div><div><div class="event-title">Easter Sunday — Sacrament Only @ 10:30 am</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div><div class="event-note">Depends on Stake Conference week</div></div></div>
+    <div class="event-card cat-stake" data-past><div class="date-badge"><span class="badge-range">Apr 13–19</span></div><div><div class="event-title">Lehi Utah 3rd Stake Conference</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div><div class="event-note">Thursday, April 16 - Stake Youth Camp Kick Off @ Saratoga Springs Temple 5pm-9pm</div></div></div>
+    <div class="event-card cat-ward" data-past><div class="date-badge"><span class="badge-range">Apr 22</span></div><div><div class="event-title">Mutual Night - Pickleball 7pm</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div><div class="event-note">Host: Priest Quorum</div></div></div>
+    <div class="event-card cat-ward" data-past><div class="date-badge"><span class="badge-range">Apr 23</span></div><div><div class="event-title">Youth Seminary Skyridge Luncheon 12:00 pm (64 burgers)</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div><div class="event-note">Host: Uyema, Moeai and Mahe</div></div></div>
+    <div class="event-card cat-ward" data-past><div class="date-badge"><span class="badge-range">Apr 26</span></div><div><div class="event-title">Deacons Quorum Presidency Meeting @ 9:45 am</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div><div class="event-note">Conducting: Lueli Aumoeualogo</div></div></div>
+    <div class="event-card cat-ward" data-past><div class="date-badge"><span class="badge-range">Apr 26</span></div><div><div class="event-title">BYC Meeting @ 12:30 pm</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div><div class="event-note">Priest Quorum Conducting</div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-range">Apr 27</span></div><div><div class="event-title">Skyridge Boys Volleyball Senior Night (Mutual Night for Deacons Quorum) @ 5:45 pm - 8:30 pm</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div><div class="event-note">Chocolate Lei Making for Fihi Fainga, Trey Mahe, Lennx Brown, Darius Lauti (4)</div></div></div>
+  </div>
+-->
+  <!-- ── MAY ── -->
+  <div class="month-section">
+    <div class="month-header"><span class="month-name">May</span><span class="month-line"></span></div>
+    <div class="event-card cat-church"><div class="date-badge"><span class="badge-range">May–August</span></div><div><div class="event-title">FSY Conference Begins</div><div class="event-meta"><span class="event-tag tag-church">Church-Wide</span></div><div class="event-note">BYU, U of U, Snow College etc. · $75/youth</div></div></div>
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Sat</span><span class="badge-num">2</span></div><div><div class="event-title">Stake Primary Baptism</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">3</span></div><div><div class="event-title">Fast Sunday</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">10</span></div><div><div class="event-title">Mother's Day</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Fri</span><span class="badge-num">13</span></div><div><div class="event-title">Deacons Quorum Homemade Icecream Making activity @ 7:00 pm (Faga's residence)</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Fri</span><span class="badge-num">16</span></div><div><div class="event-title">Deacons Quorum Temple Baptism @ 6:00 am (Draper Temple)</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">17</span></div><div><div class="event-title">Lehi 3rd Stake Seminary Graduation</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div><div class="event-note">6:00 pm · 850 N 900 E, American Fork</div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Thu</span><span class="badge-num">21</span></div><div><div class="event-title">Skyridge High School Graduation</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div><div class="event-note">8:30 am · BYU Marriott Center</div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Fri</span><span class="badge-num">22</span></div><div><div class="event-title">Last Day of School</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-holiday"><div class="date-badge"><span class="badge-day">Mon</span><span class="badge-num">25</span></div><div><div class="event-title">Memorial Day</div><div class="event-meta"><span class="event-tag tag-holiday">Holiday</span></div></div></div>
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Wed</span><span class="badge-num">27</span></div><div><div class="event-title">Stake Young Women Summer Camp</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div><div class="event-note">May 27 - May 30 | Heber Valley Camp</div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">31</span></div><div><div class="event-title">5th Sunday — 2nd Hour Combined</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+  </div>
+
+  <!-- ── JUNE ── -->
+  <div class="month-section">
+    <div class="month-header"><span class="month-name">June</span><span class="month-line"></span></div>
+    
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Wed</span><span class="badge-num">3</span></div><div><div class="event-title">Deacons Quorum Firepit Camp Cooking @ 7:00 pm (location to be determined)</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Sat</span><span class="badge-num">6</span></div><div><div class="event-title">Stake Primary Baptism</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div></div></div>
+    
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">7</span></div><div><div class="event-title">Fast Sunday</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Wed</span><span class="badge-num">10</span></div><div><div class="event-title">Youth Combined Temple Baptism @ 6:00 am & 7:30 am (Mount Timpanogos Temple)</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    
+    <div class="event-card cat-holiday"><div class="date-badge"><span class="badge-day">Fri</span><span class="badge-num">19</span></div><div><div class="event-title">Juneteenth</div><div class="event-meta"><span class="event-tag tag-holiday">Holiday</span></div></div></div>
+    
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">21</span></div><div><div class="event-title">Father's Day</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Wed</span><span class="badge-num">24</span></div><div><div class="event-title">Youth Combined - Activity Pending @ 7:00 pm </div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Mon</span><span class="badge-num">29</span></div><div><div class="event-title">Stake Young Men Summer Camp</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div><div class="event-note">June 29 - July 2 | Bennion Creek Camp - Helper, Utah</div></div></div>
+  </div>
+
+  <!-- ── JULY ── -->
+  <div class="month-section">
+    <div class="month-header"><span class="month-name">July</span><span class="month-line"></span></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-range">Jul–Oct</span></div><div><div class="event-title">Chapel Cleanup — Every Saturday (4 months - Jul, Aug, Sep, Oct)</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-holiday"><div class="date-badge"><span class="badge-day">Sat</span><span class="badge-num">4</span></div><div><div class="event-title">Independence Day</div><div class="event-meta"><span class="event-tag tag-holiday">Holiday</span></div></div></div>
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Sat</span><span class="badge-num">4</span></div><div><div class="event-title">Lehi 3rd Stake Annual Pickleball — 4th of July</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div><div class="event-note">May conflict with Primary Baptism — pending</div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">5</span></div><div><div class="event-title">Fast Sunday</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Fri</span><span class="badge-num">17</span></div><div><div class="event-title">Deacons Quorum Temple Baptism @ 5pm (Mount Timpanogos Temple)</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+  </div>
+
+  <!-- ── AUGUST ── -->
+  <div class="month-section">
+    <div class="month-header"><span class="month-name">August</span><span class="month-line"></span></div>
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Sat</span><span class="badge-num">1</span></div><div><div class="event-title">Stake Primary Baptism</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">2</span></div><div><div class="event-title">Fast Sunday</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sat</span><span class="badge-num">15</span></div><div><div class="event-title">Back to School Potluck</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div><div class="event-note">4:00–7:00 pm — pending</div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Wed</span><span class="badge-num">19</span></div><div><div class="event-title">First Day of School</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">30</span></div><div><div class="event-title">5th Sunday — 2nd Hour Combined</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+  </div>
+
+  <!-- ── SEPTEMBER ── -->
+  <div class="month-section">
+    <div class="month-header"><span class="month-name">September</span><span class="month-line"></span></div>
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Thu</span><span class="badge-num">3</span></div><div><div class="event-title">General Officer Training Sessions</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div><div class="event-note">7:00–9:00 pm — pending</div></div></div>
+    <div class="event-card cat-church"><div class="date-badge"><span class="badge-day">Sat</span><span class="badge-num">5</span></div><div><div class="event-title">Friend to Friend for Children</div><div class="event-meta"><span class="event-tag tag-church">Church-Wide</span></div><div class="event-note">Pending</div></div></div>
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Sat</span><span class="badge-num">5</span></div><div><div class="event-title">Stake Primary Baptism</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">6</span></div><div><div class="event-title">Fast Sunday</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">6</span></div><div><div class="event-title">Lehi 3rd Stake General Priesthood Meeting</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div><div class="event-note">6:00 pm — pending</div></div></div>
+    <div class="event-card cat-holiday"><div class="date-badge"><span class="badge-day">Mon</span><span class="badge-num">7</span></div><div><div class="event-title">Labor Day</div><div class="event-meta"><span class="event-tag tag-holiday">Holiday</span></div></div></div>
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Sat</span><span class="badge-num">26</span></div><div><div class="event-title">Stake Primary Baptism</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">27</span></div><div><div class="event-title">Fast Sunday</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+  </div>
+
+  <!-- ── OCTOBER ── -->
+  <div class="month-section">
+    <div class="month-header"><span class="month-name">October</span><span class="month-line"></span></div>
+    <div class="event-card cat-church"><div class="date-badge"><span class="badge-range">Oct 3–4</span></div><div><div class="event-title">General Conference — October</div><div class="event-meta"><span class="event-tag tag-church">Church-Wide</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Wed</span><span class="badge-num">14</span></div><div><div class="event-title">Ward Trunk-or-Treat Party</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div><div class="event-note">6:00–8:00 pm</div></div></div>
+    <div class="event-card cat-church"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">25</span></div><div><div class="event-title">Worldwide Event for Youth</div><div class="event-meta"><span class="event-tag tag-church">Church-Wide</span></div><div class="event-note">Pending confirmation</div></div></div>
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Sat</span><span class="badge-num">31</span></div><div><div class="event-title">Stake Primary Baptism</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div></div></div>
+  </div>
+
+  <!-- ── NOVEMBER ── -->
+  <div class="month-section">
+    <div class="month-header"><span class="month-name">November</span><span class="month-line"></span></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-range">Nov–Dec</span></div><div><div class="event-title">Tithing Settlement</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">1</span></div><div><div class="event-title">Fast Sunday</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">1</span></div><div><div class="event-title">Daylight Saving Time — Fall Back</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">8</span></div><div><div class="event-title">Lehi 41st Primary Program</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div><div class="event-note">Pending confirmation</div></div></div>
+    <div class="event-card cat-holiday"><div class="date-badge"><span class="badge-day">Wed</span><span class="badge-num">11</span></div><div><div class="event-title">Veterans Day</div><div class="event-meta"><span class="event-tag tag-holiday">Holiday</span></div></div></div>
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">15</span></div><div><div class="event-title">Lehi Utah 3rd Stake Conference</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div><div class="event-note">Pending confirmation</div></div></div>
+    <div class="event-card cat-holiday"><div class="date-badge"><span class="badge-day">Thu</span><span class="badge-num">26</span></div><div><div class="event-title">Thanksgiving Day</div><div class="event-meta"><span class="event-tag tag-holiday">Holiday</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">29</span></div><div><div class="event-title">5th Sunday — 2nd Hour Combined</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+  </div>
+
+  <!-- ── DECEMBER ── -->
+  <div class="month-section">
+    <div class="month-header"><span class="month-name">December</span><span class="month-line"></span></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Thu</span><span class="badge-num">3</span></div><div><div class="event-title">Ward Christmas Party</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div><div class="event-note">6:00–9:00 pm</div></div></div>
+    <div class="event-card cat-stake"><div class="date-badge"><span class="badge-day">Sat</span><span class="badge-num">5</span></div><div><div class="event-title">Stake Primary Baptism</div><div class="event-meta"><span class="event-tag tag-stake">Stake</span></div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">6</span></div><div><div class="event-title">Fast Sunday</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div></div></div>
+    <div class="event-card cat-church"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">6</span></div><div><div class="event-title">First Presidency's Christmas Devotional</div><div class="event-meta"><span class="event-tag tag-church">Church-Wide</span></div><div class="event-note">Pending</div></div></div>
+    <div class="event-card cat-ward"><div class="date-badge"><span class="badge-day">Sun</span><span class="badge-num">20</span></div><div><div class="event-title">Christmas Sacrament Service</div><div class="event-meta"><span class="event-tag tag-ward">Ward</span></div><div class="event-note">1 hour only · 10:30 am</div></div></div>
+    <div class="event-card cat-holiday"><div class="date-badge"><span class="badge-day">Fri</span><span class="badge-num">25</span></div><div><div class="event-title">Christmas Day</div><div class="event-meta"><span class="event-tag tag-holiday">Holiday</span></div></div></div>
+  </div>
+
+</main>
+
+<footer>
+  <strong>Lehi 41st Ward</strong> · Lehi Utah 3rd Stake · 2026<br/>
+  All dates marked pending are tentative. Confirm with the bishopric.
+</footer>
+<script>
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  document.querySelectorAll('.event-card').forEach(card => {
+    // Remove any hardcoded data-past attributes first
+    card.removeAttribute('data-past');
+
+    const badge = card.querySelector('.badge-num, .badge-range, .badge-day');
+    if (!badge) return;
+
+    const parent = card.closest('.month-section');
+    const monthName = parent?.querySelector('.month-name')?.textContent?.trim();
+    if (!monthName) return;
+
+    const year = 2026;
+    const monthIndex = new Date(`${monthName} 1, ${year}`).getMonth();
+
+    // Get the date text from the badge
+    const dateText = card.querySelector('.badge-num')?.textContent?.trim()
+      || card.querySelector('.badge-range')?.textContent?.trim();
+
+    if (!dateText) return;
+
+    // Parse single day (e.g. "17") or range start (e.g. "Apr 4–5" → Apr 4)
+    let eventDate;
+    const singleDay = parseInt(dateText);
+    if (!isNaN(singleDay)) {
+      eventDate = new Date(year, monthIndex, singleDay);
+    } else {
+      // Range like "Apr 4–5" or "May 27" — grab first number
+      const match = dateText.match(/(\d+)/);
+      if (match) {
+        eventDate = new Date(year, monthIndex, parseInt(match[1]));
+      }
+    }
+
+    if (eventDate && eventDate < today) {
+      card.setAttribute('data-past', '');
+    }
+  });
+</script>
+
+</body>
+</html>
