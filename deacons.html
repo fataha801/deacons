@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lehi 41st Ward — Deacons Quorum Calendar 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:      #1c1a2e;
+      --navy-mid:  #28263f;
+      --purple:    #7c5cbf;
+      --purple-lt: #a688d8;
+      --purple-xlt:#ede6f8;
+      --coral:     #FC8F8F;
+      --coral-dk:  #c05858;
+      --cream:     #f5f3fa;
+      --stone:     #e4ddf0;
+      --muted:     #8a82a8;
+      --white:     #ffffff;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --shadow-card: 0 2px 12px rgba(28,26,46,.10);
+      --shadow-lift: 0 6px 24px rgba(28,26,46,.18);
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', sans-serif;
+      --spacing-xs:  4px;
+      --spacing-sm:  8px;
+      --spacing-md:  16px;
+      --spacing-lg:  24px;
+      --spacing-xl:  40px;
+      --spacing-2xl: 64px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--navy);
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      color: var(--white);
+      padding: var(--spacing-xl) var(--spacing-md);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 110%, rgba(124,92,191,.28) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 20%, rgba(124,92,191,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 30% 20% at 15% 30%, rgba(252,143,143,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-weight: 500; font-size: .7rem; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--purple-lt); margin-bottom: var(--spacing-sm);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 7vw, 3.2rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: var(--spacing-xs);
+    }
+    .hero-quorum-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(124,92,191,.25); border: 1px solid rgba(166,136,216,.4);
+      border-radius: 999px; padding: 5px 16px; margin: var(--spacing-sm) auto;
+      font-size: .78rem; font-weight: 500; color: var(--purple-lt); letter-spacing: .04em;
+    }
+    .hero-sub {
+      font-size: .85rem; color: rgba(255,255,255,.6);
+      margin-top: var(--spacing-sm); max-width: 340px; margin-inline: auto;
+    }
+    .purple-rule { width: 48px; height: 3px; background: var(--purple); border-radius: 2px; margin: var(--spacing-md) auto; }
+
+    /* ── TIMES STRIP ── */
+    .times-strip { background: var(--purple); color: var(--white); padding: var(--spacing-md); }
+    .times-strip-inner {
+      max-width: 700px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr; gap: var(--spacing-sm);
+    }
+    @media (min-width: 480px) { .times-strip-inner { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 700px) { .times-strip-inner { grid-template-columns: repeat(3, 1fr); } }
+    .time-item { display: flex; align-items: flex-start; gap: 10px; }
+    .time-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+    .time-label { font-size: .72rem; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; opacity: .75; margin-bottom: 1px; }
+    .time-value { font-size: .82rem; font-weight: 500; line-height: 1.4; }
+
+    /* ── MAIN ── */
+    .main { max-width: 700px; margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md) var(--spacing-2xl); }
+
+    /* ── TAGS ── */
+    .event-tag {
+      font-size: .6rem; font-weight: 500; text-transform: uppercase;
+      letter-spacing: .08em; padding: 2px 7px; border-radius: 999px;
+      white-space: nowrap; display: inline-block;
+    }
+    .tag-holiday  { background: #d4edd4; color: #2d6b2d; }
+    .tag-ward     { background: #ede6f8; color: #4a2d8a; }
+    .tag-stake    { background: #dde6f5; color: #2d4a8a; }
+    .tag-church   { background: #ecdcf5; color: #5e2d8a; }
+    .tag-yw       { background: #ecdcf5; color: #5e2d8a; }
+    .tag-priests  { background: #f5e0dc; color: #7a2e1e; }
+    .tag-teachers { background: #d8f0ec; color: #1e5f54; }
+    .tag-deacons  { background: #f3e8ff; color: #5c34a0; }
+    .tag-deacons-host { background: #fde8e8; color: #7a2020; }
+
+    /* ── LEGEND ── */
+    .legend {
+      display: flex; flex-wrap: wrap; gap: var(--spacing-sm) var(--spacing-md);
+      margin-bottom: var(--spacing-xl); padding: var(--spacing-md);
+      background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-card);
+    }
+    .legend-item { display: flex; align-items: center; gap: 7px; font-size: .75rem; font-weight: 500; color: var(--navy); }
+    .legend-dot  { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── QUICK LINKS ── */
+    .quick-links-section { margin-bottom: var(--spacing-xl); }
+    .quick-links-label { font-size: .68rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: var(--spacing-md); }
+    .quick-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-sm); }
+    @media (min-width: 560px) { .quick-links-grid { grid-template-columns: repeat(4, 1fr); } }
+    .quick-link-btn {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 7px; padding: var(--spacing-md) var(--spacing-sm);
+      background: var(--white); border: 1.5px solid var(--stone); border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card); text-decoration: none; color: var(--navy);
+      font-size: .75rem; font-weight: 500; text-align: center; line-height: 1.3;
+      cursor: pointer; transition: box-shadow .18s, transform .18s, border-color .18s;
+      position: relative; overflow: hidden;
+    }
+    .quick-link-btn::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--purple); transform: scaleX(0); transform-origin: left; transition: transform .22s ease;
+    }
+    .quick-link-btn:hover { box-shadow: var(--shadow-lift); transform: translateY(-2px); border-color: var(--purple-lt); }
+    .quick-link-btn:hover::before { transform: scaleX(1); }
+    .quick-link-btn:active { transform: translateY(0); box-shadow: var(--shadow-card); }
+    .ql-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; background: var(--purple-xlt); transition: background .18s; }
+    .quick-link-btn:hover .ql-icon { background: #e0d2f5; }
+    .ql-label { color: var(--navy); }
+
+    /* ── LEADER QUICK REFERENCE ── */
+    .leader-ref-section { margin-bottom: var(--spacing-xl); }
+    .leader-ref-label { font-size: .68rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: var(--spacing-md); }
+    .leader-ref-card { background: var(--white); border-radius: var(--radius-md); border: 1px solid var(--stone); overflow: hidden; }
+    .leader-ref-head {
+      padding: 10px 16px 9px; border-bottom: 1px solid var(--stone);
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      background: var(--purple-xlt);
+    }
+    .leader-ref-head-icon { font-size: 1rem; flex-shrink: 0; }
+    .leader-ref-head-title { font-size: .8rem; font-weight: 600; color: var(--navy); flex: 1; }
+    .leader-ref-head-sub { font-size: .65rem; color: var(--muted); white-space: nowrap; }
+
+    /* Deacons spotlight card */
+    .deacons-spotlight {
+      background: linear-gradient(135deg, #2a1d4a 0%, #1c1a2e 100%);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(124,92,191,.4);
+      padding: var(--spacing-md) var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .ds-label { font-size: .62rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--purple-lt); margin-bottom: 2px; }
+    .ds-row { display: flex; align-items: center; gap: 10px; }
+    .ds-icon { font-size: 1.2rem; }
+    .ds-text { font-size: .88rem; font-weight: 500; color: var(--white); }
+    .ds-sub { font-size: .72rem; color: rgba(255,255,255,.55); }
+
+    .leader-ref-notice {
+      background: var(--purple-xlt); border: 1px solid var(--purple-lt);
+      border-radius: var(--radius-sm); padding: 8px 14px;
+      font-size: .72rem; color: #4a2d8a; line-height: 1.5;
+      margin-bottom: 10px; display: flex; gap: 8px; align-items: flex-start;
+    }
+
+    .wed-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 480px) { .wed-grid { grid-template-columns: 1fr 1fr; } }
+    .wed-col { padding: 10px 14px; border-right: 1px solid var(--stone); }
+    .wed-col:last-child { border-right: none; }
+    .wed-col.wed-highlight { background: #f5f0ff; }
+    .wed-num { font-size: .6rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--purple); margin-bottom: 4px; }
+    .wed-who { font-size: .75rem; font-weight: 500; color: var(--navy); line-height: 1.35; }
+    .wed-note { font-size: .64rem; color: var(--muted); margin-top: 2px; line-height: 1.3; }
+
+    .months-assign-grid { display: grid; grid-template-columns: repeat(6, 1fr); }
+    @media (max-width: 560px) { .months-assign-grid { grid-template-columns: repeat(3, 1fr); } }
+    .month-assign-cell {
+      padding: 8px 12px; border-right: 1px solid var(--stone); border-bottom: 1px solid var(--stone);
+    }
+    .month-assign-cell.mac-active { background: #f5f0ff; }
+    .month-assign-cell:nth-child(6n) { border-right: none; }
+    .month-assign-cell:nth-last-child(-n+6) { border-bottom: none; }
+    @media (max-width: 560px) {
+      .month-assign-cell:nth-child(3n) { border-right: none; }
+      .month-assign-cell:nth-child(6n) { border-right: 1px solid var(--stone); }
+    }
+    .mac-month { font-size: .62rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 5px; }
+    .mac-row { display: flex; align-items: center; gap: 5px; margin-bottom: 3px; font-size: .62rem; color: var(--navy); font-weight: 500; line-height: 1.25; }
+    .mac-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .mac-dot-priest   { background: #c0604a; }
+    .mac-dot-teachers { background: #3a8f7f; }
+    .mac-dot-deacons  { background: var(--purple); }
+
+    /* ── GOALS ── */
+    .goals-section { margin-bottom: var(--spacing-xl); }
+    .goals-section-label { font-size: .68rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: var(--spacing-md); }
+    .goals-grid { display: grid; grid-template-columns: 1fr; gap: var(--spacing-md); }
+    @media (min-width: 480px) { .goals-grid { grid-template-columns: 1fr 1fr; } }
+    .goal-card {
+      background: var(--white); border-radius: var(--radius-md);
+      border-top: 3px solid transparent; box-shadow: var(--shadow-card);
+      overflow: hidden; transition: box-shadow .18s, transform .18s;
+    }
+    .goal-card:hover { box-shadow: var(--shadow-lift); transform: translateY(-2px); }
+    .goal-spiritual    { border-top-color: var(--purple); }
+    .goal-intellectual { border-top-color: #5b82bf; }
+    .goal-physical     { border-top-color: #6c9f6c; }
+    .goal-social       { border-top-color: var(--coral-dk); }
+    .goal-card-header { display: flex; align-items: center; gap: 9px; padding: 10px var(--spacing-md); }
+    .goal-spiritual    .goal-card-header { background: var(--purple-xlt); }
+    .goal-intellectual .goal-card-header { background: #eef1f9; }
+    .goal-physical     .goal-card-header { background: #eef5ee; }
+    .goal-social       .goal-card-header { background: #fdf0f0; }
+    .goal-icon  { font-size: 1.1rem; line-height: 1; }
+    .goal-title { font-family: var(--font-display); font-size: .88rem; font-weight: 700; color: var(--navy); }
+    .goal-count { margin-left: auto; font-size: .65rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; }
+    .goal-spiritual    .goal-count { background: #e0d2f5; color: #4a2d8a; }
+    .goal-intellectual .goal-count { background: #dde6f5; color: #2d4a8a; }
+    .goal-physical     .goal-count { background: #d4edd4; color: #2d6b2d; }
+    .goal-social       .goal-count { background: #fde8e8; color: #7a2020; }
+    .goal-list { list-style: none; padding: var(--spacing-xs) var(--spacing-md) var(--spacing-md); }
+    .goal-list li {
+      position: relative; padding: 7px 0 7px 20px;
+      font-size: .82rem; color: var(--navy);
+      border-bottom: 1px solid var(--stone); line-height: 1.45;
+    }
+    .goal-list li:last-child { border-bottom: none; }
+    .goal-list li::before { content: '›'; position: absolute; left: 3px; top: 6px; font-size: 1.1rem; font-weight: 700; line-height: 1; }
+    .goal-spiritual    .goal-list li::before { color: var(--purple); }
+    .goal-intellectual .goal-list li::before { color: #5b82bf; }
+    .goal-physical     .goal-list li::before { color: #6c9f6c; }
+    .goal-social       .goal-list li::before { color: var(--coral-dk); }
+
+    /* ── SECTION DIVIDER ── */
+    .section-divider { display: flex; align-items: center; gap: var(--spacing-md); margin: var(--spacing-xl) 0; }
+    .section-divider-line { flex: 1; height: 1px; background: var(--stone); }
+    .section-divider-label { font-size: .68rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+    /* ── MONTH CALENDAR ── */
+    .month-section { margin-bottom: var(--spacing-xl); }
+    .month-header { display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-md); }
+    .month-name { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--navy); }
+    .month-line { flex: 1; height: 1px; background: var(--stone); }
+    .month-event-count { font-size: .68rem; font-weight: 500; color: var(--muted); white-space: nowrap; }
+
+    .week-group { margin-bottom: 12px; }
+    .week-label {
+      font-size: .62rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em;
+      color: var(--muted); padding: 5px 0 5px 12px;
+      border-left: 2px solid var(--stone); margin-bottom: 4px;
+    }
+
+    /* Event row */
+    .ev {
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 4px;
+      transition: box-shadow .15s, transform .15s;
+      border-left: 3px solid transparent;
+    }
+    .ev:hover { box-shadow: var(--shadow-lift); transform: translateY(-1px); }
+
+    /* Deacons events get a highlighted look */
+    .ev.cat-deacons         { border-left-color: var(--purple); }
+    .ev.cat-deacons-primary { border-left-color: var(--purple); background: #faf7ff; }
+    .ev.cat-ward            { border-left-color: var(--purple-lt); }
+    .ev.cat-stake           { border-left-color: #5b82bf; }
+    .ev.cat-church          { border-left-color: #9b6cbf; }
+    .ev.cat-holiday         { border-left-color: #6c9f6c; }
+    .ev.cat-yw              { border-left-color: #9b6cbf; }
+    .ev.cat-other           { border-left-color: #ccc; }
+
+    /* Dim non-deacon events slightly so Deacons events pop */
+    .ev.cat-yw,
+    .ev.cat-other { opacity: .75; }
+
+    /* Past events */
+    .ev[data-past] { opacity: .38 !important; filter: grayscale(60%); border-left-color: #ccc !important; box-shadow: none; pointer-events: none; }
+    .ev[data-past] .ev-title { text-decoration: line-through; text-decoration-color: var(--muted); text-decoration-thickness: 1.5px; }
+    .ev[data-past] .ev-date-badge { background: #ececec !important; }
+    .ev[data-past] .ev-day, .ev[data-past] .ev-num { color: var(--muted) !important; }
+
+    /* Date badge */
+    .ev-date-badge { text-align: center; border-radius: var(--radius-sm); padding: 5px 4px; flex-shrink: 0; }
+    .cat-deacons         .ev-date-badge,
+    .cat-deacons-primary .ev-date-badge { background: var(--purple-xlt); }
+    .cat-ward     .ev-date-badge { background: #f0ebff; }
+    .cat-stake    .ev-date-badge { background: #eef1f9; }
+    .cat-church   .ev-date-badge { background: #f5eef9; }
+    .cat-holiday  .ev-date-badge { background: #eef5ee; }
+    .cat-yw       .ev-date-badge { background: #f5eef9; }
+    .cat-other    .ev-date-badge { background: #f5f5f5; }
+
+    .ev-day   { font-size: .58rem; font-weight: 500; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); display: block; }
+    .ev-num   { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; line-height: 1; color: var(--navy); display: block; }
+    .ev-range { font-family: var(--font-display); font-size: .68rem; font-weight: 700; color: var(--navy); display: block; padding: 2px; }
+
+    .ev-content { min-width: 0; }
+    .ev-title { font-size: .87rem; font-weight: 500; color: var(--navy); line-height: 1.3; }
+    .ev-note  { font-size: .72rem; color: var(--muted); font-style: italic; margin-top: 2px; }
+
+    .ev-tag-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy); color: rgba(255,255,255,.5);
+      text-align: center; padding: var(--spacing-lg) var(--spacing-md);
+      font-size: .72rem; letter-spacing: .04em;
+    }
+    footer strong { color: var(--purple-lt); }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="hero-eyebrow">Lehi Utah 3rd Stake · Lehi 41st Ward</p>
+  <h1>Deacons Quorum</h1>
+  <div class="purple-rule"></div>
+  <div class="hero-quorum-badge">⚜️ 2026 Annual Calendar &amp; Planner</div>
+  <p class="hero-sub">All dates tentative unless otherwise confirmed. Watch for updates from your bishopric and quorum adviser.</p>
+</header>
+
+<section class="times-strip">
+  <div class="times-strip-inner">
+    <div class="time-item"><span class="time-icon">⛪</span><div><div class="time-label">Sacrament</div><div class="time-value">Sundays · 10:30 am</div></div></div>
+    <div class="time-item"><span class="time-icon">📖</span><div><div class="time-label">Sunday School / Classes</div><div class="time-value">11:30 am · 1st &amp; 3rd Sun</div></div></div>
+    <div class="time-item"><span class="time-icon">🤝</span><div><div class="time-label">Priesthood / RS</div><div class="time-value">11:30 am · 2nd &amp; 4th Sun</div></div></div>
+    <div class="time-item"><span class="time-icon">🏋️</span><div><div class="time-label">Mutual Nights</div><div class="time-value">Wednesdays · 7:00 pm</div></div></div>
+    <div class="time-item"><span class="time-icon">👥</span><div><div class="time-label">Ward Youth Council</div><div class="time-value">3rd Sun · 12:30 pm</div></div></div>
+    <div class="time-item"><span class="time-icon">📋</span><div><div class="time-label">Deacons Quorum Presidency</div><div class="time-value">2nd, 3rd &amp; 4th Sun · 9:45–10:15 am<br/><span style="font-size:.7rem;opacity:.75;">(except Mothers/Fathers/Conference/Christmas Sundays)</span></div></div></div>
+  </div>
+</section>
+
+<main class="main">
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--purple)"></span>Deacons Event</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--purple-lt)"></span>Ward Event</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#5b82bf"></span>Stake Event</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#9b6cbf"></span>Church-Wide / YW Host</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#6c9f6c"></span>Public Holiday</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#3a8f7f"></span>Teachers</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#c0604a"></span>Priests</div>
+  </div>
+
+  <!-- QUICK LINKS -->
+  <div class="quick-links-section">
+    <p class="quick-links-label">Camp Resources &amp; References</p>
+    <div class="quick-links-grid">
+      <a class="quick-link-btn" href="https://lehi41.com/ymcamp/index.html"><div class="ql-icon">🎒</div><span class="ql-label">Young Men Camp Resource</span></a>
+    </div>
+  </div>
+
+  <!-- LEADER QUICK REFERENCE -->
+  <div class="leader-ref-section">
+    <p class="leader-ref-label">Leader Quick Reference</p>
+
+    <!-- Deacons spotlight -->
+    <div class="deacons-spotlight">
+      <div class="ds-label">Deacons Quorum — Adviser</div>
+      <div class="ds-row">
+        <span class="ds-icon">🙍</span>
+        <div>
+          <div class="ds-text">Bro. Taukeiaho</div>
+          <div class="ds-sub">Deacons Adviser · Sacrament Bread months: Mar · Jun · Sep · Dec</div>
+        </div>
+      </div>
+      <div class="ds-row" style="margin-top:4px;">
+        <span class="ds-icon">📅</span>
+        <div>
+          <div class="ds-text">Host Months: March · June · September · December</div>
+          <div class="ds-sub">1st Wed YM Activity · 2nd &amp; 4th Wed Combined Youth (even months: YM host · odd months: YW host)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="leader-ref-card" style="margin-bottom:10px;">
+      <div class="leader-ref-head">
+        <span class="leader-ref-head-icon">📅</span>
+        <span class="leader-ref-head-title">Mutual Nights — Wednesday Schedule</span>
+      </div>
+      <div class="wed-grid">
+        <div class="wed-col">
+          <div class="wed-num">1st Wed</div>
+          <div class="wed-who">YM Combined</div>
+          <div class="wed-note">Assigned quorum organizes (see monthly rotation)</div>
+        </div>
+        <div class="wed-col wed-highlight">
+          <div class="wed-num">2nd &amp; 4th Wed</div>
+          <div class="wed-who">Combined Youth</div>
+          <div class="wed-note">Deacons host in Jun &amp; Dec (even) · YW host in Sep (odd)</div>
+        </div>
+        <div class="wed-col">
+          <div class="wed-num">3rd Wed</div>
+          <div class="wed-who">Individual Quorums</div>
+          <div class="wed-note">Each quorum runs their own activity</div>
+        </div>
+        <div class="wed-col">
+          <div class="wed-num">5th Wed</div>
+          <div class="wed-who">Bishopric-led Night</div>
+          <div class="wed-note">When a 5th Wednesday occurs</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="leader-ref-notice">
+      <span>⚠</span>
+      <span>Schedule may shift for Stake Conference, Fundraisers, Temple Open House, Youth Camps and FSY, Halloween, Christmas party, or Cornbellys. Adjust as needed when those events fall on Mutual Nights.</span>
+    </div>
+
+    <div class="leader-ref-card" style="margin-bottom:10px;">
+      <div class="leader-ref-head">
+        <span class="leader-ref-head-icon">🗓</span>
+        <span class="leader-ref-head-title">Monthly Assignments — Sacrament Bread · 1st Wed YM Activity · 4th Wed Host</span>
+        <span class="leader-ref-head-sub">All three share the same rotation</span>
+      </div>
+      <div class="months-assign-grid">
+        <div class="month-assign-cell"><div class="mac-month">January</div><div class="mac-row"><span class="mac-dot mac-dot-priest"></span><span>Priests · Bishop</span></div></div>
+        <div class="month-assign-cell"><div class="mac-month">February</div><div class="mac-row"><span class="mac-dot mac-dot-teachers"></span><span>Teachers · Bro. Havili</span></div></div>
+        <div class="month-assign-cell mac-active"><div class="mac-month">March ⚜️</div><div class="mac-row"><span class="mac-dot mac-dot-deacons"></span><span>Deacons · Bro. Taukeiaho</span></div></div>
+        <div class="month-assign-cell"><div class="mac-month">April</div><div class="mac-row"><span class="mac-dot mac-dot-priest"></span><span>Priests · Bishop</span></div></div>
+        <div class="month-assign-cell"><div class="mac-month">May</div><div class="mac-row"><span class="mac-dot mac-dot-teachers"></span><span>Teachers · Bro. Havili</span></div></div>
+        <div class="month-assign-cell mac-active"><div class="mac-month">June ⚜️</div><div class="mac-row"><span class="mac-dot mac-dot-deacons"></span><span>Deacons · Bro. Taukeiaho</span></div></div>
+        <div class="month-assign-cell"><div class="mac-month">July</div><div class="mac-row"><span class="mac-dot mac-dot-priest"></span><span>Priests · Bishop</span></div></div>
+        <div class="month-assign-cell"><div class="mac-month">August</div><div class="mac-row"><span class="mac-dot mac-dot-teachers"></span><span>Teachers · Bro. Havili</span></div></div>
+        <div class="month-assign-cell mac-active"><div class="mac-month">September ⚜️</div><div class="mac-row"><span class="mac-dot mac-dot-deacons"></span><span>Deacons · Bro. Taukeiaho</span></div></div>
+        <div class="month-assign-cell"><div class="mac-month">October</div><div class="mac-row"><span class="mac-dot mac-dot-priest"></span><span>Priests · Bishop</span></div></div>
+        <div class="month-assign-cell"><div class="mac-month">November</div><div class="mac-row"><span class="mac-dot mac-dot-teachers"></span><span>Teachers · Bro. Havili</span></div></div>
+        <div class="month-assign-cell mac-active"><div class="mac-month">December ⚜️</div><div class="mac-row"><span class="mac-dot mac-dot-deacons"></span><span>Deacons · Bro. Taukeiaho</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUARTERLY GOALS -->
+  <div class="goals-section">
+    <p class="goals-section-label">Deacons Quarterly Goals (April – July)</p>
+    <div class="goals-grid">
+      <div class="goal-card goal-spiritual">
+        <div class="goal-card-header"><span class="goal-icon">🙏</span><span class="goal-title">Spiritual</span><span class="goal-count">2 goals</span></div>
+        <ul class="goal-list">
+          <li>Quorum Monthly Temple Baptisms</li>
+          <li>Prepare 5 Family Male Names (your own or ward members) — take to the temple</li>
+        </ul>
+      </div>
+      <div class="goal-card goal-intellectual">
+        <div class="goal-card-header"><span class="goal-icon">📚</span><span class="goal-title">Intellectual</span><span class="goal-count">1 goal</span></div>
+        <ul class="goal-list"><li>Boxing Fundamentals with Bro. Pulu</li></ul>
+      </div>
+      <div class="goal-card goal-physical">
+        <div class="goal-card-header"><span class="goal-icon">🥾</span><span class="goal-title">Physical</span><span class="goal-count">2 goals</span></div>
+        <ul class="goal-list">
+          <li>Lehi Utah 3rd Stake Camp (Jun 29–Jul 2) @ Cobble Creek Camp, Utah</li>
+          <li>Traverse Mountain Hike</li>
+        </ul>
+      </div>
+      <div class="goal-card goal-social">
+        <div class="goal-card-header"><span class="goal-icon">🤝</span><span class="goal-title">Social</span><span class="goal-count">1 goal</span></div>
+        <ul class="goal-list"><li>Camp Fire Cooking</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider">
+    <span class="section-divider-line"></span>
+    <span class="section-divider-label">2026 Calendar — Deacons View</span>
+    <span class="section-divider-line"></span>
+  </div>
+
+  <!-- ── JUNE ── Deacons host month -->
+  <div class="month-section">
+    <div class="month-header">
+      <span class="month-name">June</span>
+      <span class="month-line"></span>
+      <span class="month-event-count">⚜️ Deacons month</span>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 1 · Jun 1–7</div>
+      <div class="ev cat-deacons-primary" data-date="2026-6-3">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">3</span></div>
+        <div class="ev-content"><div class="ev-title">Combined YM — Firepit Camp Cooking · Dry Creek Park (West Pavilion) 5–8 pm</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-deacons">Deacons Host — 1st Wed</span></div>
+      </div>
+      <div class="ev cat-stake" data-date="2026-6-6">
+        <div class="ev-date-badge"><span class="ev-day">Sat</span><span class="ev-num">6</span></div>
+        <div class="ev-content"><div class="ev-title">Stake Primary Baptism</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-stake">Stake</span></div>
+      </div>
+      <div class="ev cat-ward" data-date="2026-6-7">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">7</span></div>
+        <div class="ev-content"><div class="ev-title">Fast Sunday — AP Meeting · Advisors &amp; Youth Presidencies 9:30–10:15 am</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward — AP</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 2 · Jun 8–14</div>
+      <div class="ev cat-deacons-primary" data-date="2026-6-10">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">10</span></div>
+        <div class="ev-content"><div class="ev-title">Youth Combined Temple Baptism · 6:00 am · Mt Timpanogos Temple</div><div class="ev-note">Meet in the temple lobby by 5:45 am.</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-deacons">Deacons Host — 2nd Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 3 · Jun 15–21</div>
+      <div class="ev cat-deacons-primary" data-date="2026-6-17">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">17</span></div>
+        <div class="ev-content"><div class="ev-title">Boxing Fundamentals with Bro. Pulu · 7:00 pm · Lehi 41st Ward Gym</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-deacons">Deacons — 3rd Wed</span></div>
+      </div>
+      <div class="ev cat-holiday" data-date="2026-6-19">
+        <div class="ev-date-badge"><span class="ev-day">Fri</span><span class="ev-num">19</span></div>
+        <div class="ev-content"><div class="ev-title">Juneteenth</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-holiday">Holiday</span></div>
+      </div>
+      <div class="ev cat-ward" data-date="2026-6-21">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">21</span></div>
+        <div class="ev-content"><div class="ev-title">Father's Day</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 4 · Jun 22–28</div>
+      <div class="ev cat-deacons-primary" data-date="2026-6-24">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">24</span></div>
+        <div class="ev-content"><div class="ev-title">Youth Combined — Capture The Flag + t-shirt printing · 7:00 pm · Lehi 41st Ward Gym</div><div class="ev-note">Canceled Touch Rugby due to air quality.</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-deacons">Deacons Host — 4th Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 5 · Jun 29–30</div>
+      <div class="ev cat-stake" data-date="2026-6-29">
+        <div class="ev-date-badge"><span class="ev-day">Mon</span><span class="ev-num">29</span></div>
+        <div class="ev-content">
+          <div class="ev-title">Stake Young Men Summer Camp — No Mutual for YM during Camp Week</div>
+          <div class="ev-note">Jun 29 – Jul 2 · Cobblecreek Campground, Huntsville, Utah</div>
+        </div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-stake">Stake — AP</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── JULY ── Priests month; YW host 2nd & 4th Wed -->
+  <div class="month-section">
+    <div class="month-header">
+      <span class="month-name">July</span>
+      <span class="month-line"></span>
+      <span class="month-event-count">Priests month</span>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Ongoing</div>
+      <div class="ev cat-ward" data-date="2026-7-1">
+        <div class="ev-date-badge"><span class="ev-range">Jul–Oct</span></div>
+        <div class="ev-content"><div class="ev-title">Chapel Cleanup — Every Saturday (Jul, Aug, Sep, Oct)</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 1 · Jul 1–5</div>
+      <div class="ev cat-stake" data-date="2026-7-2">
+        <div class="ev-date-badge"><span class="ev-day">Thu</span><span class="ev-num">2</span></div>
+        <div class="ev-content"><div class="ev-title">Stake Young Men Summer Camp — Returning from Camp</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-stake">Stake — AP</span></div>
+      </div>
+      <div class="ev cat-holiday" data-date="2026-7-4">
+        <div class="ev-date-badge"><span class="ev-day">Sat</span><span class="ev-num">4</span></div>
+        <div class="ev-content"><div class="ev-title">Independence Day</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-holiday">Holiday</span></div>
+      </div>
+      <div class="ev cat-stake" data-date="2026-7-4">
+        <div class="ev-date-badge"><span class="ev-day">Sat</span><span class="ev-num">4</span></div>
+        <div class="ev-content"><div class="ev-title">Stake Primary Baptism</div><div class="ev-note">Pending confirmation</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-stake">Stake</span></div>
+      </div>
+      <div class="ev cat-ward" data-date="2026-7-5">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">5</span></div>
+        <div class="ev-content"><div class="ev-title">Fast Sunday</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 2 · Jul 6–12</div>
+      <div class="ev cat-yw" data-date="2026-7-8">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">8</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Youth Temple Baptism · 8:00 pm · Mount Timpanogas Temple</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-yw">YW Host — 2nd Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 3 · Jul 13–19</div>
+      <div class="ev cat-deacons" data-date="2026-7-15">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">15</span></div>
+        <div class="ev-content"><div class="ev-title">Deacons Quorum Pending Activity · 7:00 pm</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-deacons">Deacons — 3rd Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 4 · Jul 20–26</div>
+      <div class="ev cat-yw" data-date="2026-7-22">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">22</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Youth Activity</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-yw">YW Host — 4th Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 5 · Jul 27–31</div>
+      <div class="ev cat-ward" data-date="2026-7-29">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">29</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Youth — 5th Wednesday</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Bishopric Led Activity</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── AUGUST ── Teachers month; YM host 2nd & 4th Wed -->
+  <div class="month-section">
+    <div class="month-header">
+      <span class="month-name">August</span>
+      <span class="month-line"></span>
+      <span class="month-event-count">Teachers month</span>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 1 · Aug 1–2</div>
+      <div class="ev cat-stake" data-date="2026-8-1">
+        <div class="ev-date-badge"><span class="ev-day">Sat</span><span class="ev-num">1</span></div>
+        <div class="ev-content"><div class="ev-title">Stake Primary Baptism</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-stake">Stake</span></div>
+      </div>
+      <div class="ev cat-ward" data-date="2026-8-2">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">2</span></div>
+        <div class="ev-content"><div class="ev-title">Fast Sunday</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 1 cont. · Aug 3–9</div>
+      <div class="ev cat-other" data-date="2026-8-5">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">5</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Young Men — Legacy Center Sports Night: Swimming and Basketball</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-teachers">Teachers Host YM — 1st Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 2 · Aug 10–16</div>
+      <div class="ev cat-other" data-date="2026-8-12">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">12</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Youth Activity — Temple Baptisms 9:30 AM</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-teachers">Teachers Host — 2nd Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 3 · Aug 17–23</div>
+      <div class="ev cat-deacons" data-date="2026-8-19">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">19</span></div>
+        <div class="ev-content"><div class="ev-title">First Day of School — Individual Quorums · 7 pm · Jack &amp; Jills Bowling</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-deacons">Deacons — 3rd Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 4 · Aug 24–30</div>
+      <div class="ev cat-other" data-date="2026-8-26">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">26</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Youth Activity · 7 pm — Chair Soccer</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-teachers">Teachers Host — 4th Wed</span></div>
+      </div>
+      <div class="ev cat-ward" data-date="2026-8-30">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">30</span></div>
+        <div class="ev-content"><div class="ev-title">5th Sunday — 2nd Hour Combined</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SEPTEMBER ── Deacons host month; YW host 2nd & 4th Wed -->
+  <div class="month-section">
+    <div class="month-header">
+      <span class="month-name">September</span>
+      <span class="month-line"></span>
+      <span class="month-event-count">⚜️ Deacons month</span>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 1 · Sep 1–6</div>
+      <div class="ev cat-deacons-primary" data-date="2026-9-2">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">2</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Young Men</div><div class="ev-note">Possible Temple Baptisms — Wednesday or Saturday</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-deacons">Deacons Host YM — 1st Wed</span></div>
+      </div>
+      <div class="ev cat-stake" data-date="2026-9-5">
+        <div class="ev-date-badge"><span class="ev-day">Sat</span><span class="ev-num">5</span></div>
+        <div class="ev-content"><div class="ev-title">Stake Primary Baptism</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-stake">Stake</span></div>
+      </div>
+      <div class="ev cat-ward" data-date="2026-9-6">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">6</span></div>
+        <div class="ev-content"><div class="ev-title">Fast Sunday</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 2 · Sep 7–13</div>
+      <div class="ev cat-holiday" data-date="2026-9-7">
+        <div class="ev-date-badge"><span class="ev-day">Mon</span><span class="ev-num">7</span></div>
+        <div class="ev-content"><div class="ev-title">Labor Day</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-holiday">Holiday</span></div>
+      </div>
+      <div class="ev cat-yw" data-date="2026-9-9">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">9</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Youth</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-yw">YW Host — 2nd Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 3 · Sep 14–20</div>
+      <div class="ev cat-deacons-primary" data-date="2026-9-16">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">16</span></div>
+        <div class="ev-content"><div class="ev-title">Individual Quorums</div><div class="ev-note">Possible Temple Baptisms — Wednesday or Saturday</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-deacons">Deacons — 3rd Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 4 · Sep 21–27</div>
+      <div class="ev cat-yw" data-date="2026-9-23">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">23</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Youth</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-yw">YW Host — 4th Wed</span></div>
+      </div>
+      <div class="ev cat-stake" data-date="2026-9-26">
+        <div class="ev-date-badge"><span class="ev-day">Sat</span><span class="ev-num">26</span></div>
+        <div class="ev-content"><div class="ev-title">Stake Primary Baptism</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-stake">Stake</span></div>
+      </div>
+      <div class="ev cat-ward" data-date="2026-9-27">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">27</span></div>
+        <div class="ev-content"><div class="ev-title">Fast Sunday</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 5 · Sep 28–30</div>
+      <div class="ev cat-ward" data-date="2026-9-30">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">30</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Youth — 5th Wednesday</div><div class="ev-note">Cornbellys ???</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Bishopric Led Activity</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── OCTOBER ── Priests month -->
+  <div class="month-section">
+    <div class="month-header">
+      <span class="month-name">October</span>
+      <span class="month-line"></span>
+      <span class="month-event-count">Priests month</span>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 1 · Oct 1–4</div>
+      <div class="ev cat-church" data-date="2026-10-3">
+        <div class="ev-date-badge"><span class="ev-range">Oct 3–4</span></div>
+        <div class="ev-content"><div class="ev-title">General Conference — October</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-church">Church-Wide</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 1 cont. · Oct 5–11</div>
+      <div class="ev cat-other" data-date="2026-10-7">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">7</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Young Men · 7:00 pm</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-priests">Priests Host — 1st Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 2 · Oct 12–18</div>
+      <div class="ev cat-ward" data-date="2026-10-14">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">14</span></div>
+        <div class="ev-content"><div class="ev-title">Ward Trunk-or-Treat Party · 6:00–8:00 pm</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Combined Youth — Halloween 2nd Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 3 · Oct 19–25</div>
+      <div class="ev cat-deacons" data-date="2026-10-21">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">21</span></div>
+        <div class="ev-content"><div class="ev-title">Individual Quorum · 7:00 pm</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-deacons">Deacons — 3rd Wed</span></div>
+      </div>
+      <div class="ev cat-ward" data-date="2026-10-25">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">25</span></div>
+        <div class="ev-content"><div class="ev-title">Lehi 41st Primary Program</div><div class="ev-note">Pending confirmation</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+      <div class="ev cat-church" data-date="2026-10-25">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">25</span></div>
+        <div class="ev-content"><div class="ev-title">Worldwide Event for Youth</div><div class="ev-note">Pending confirmation</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-church">Church-Wide</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 4 · Oct 26–31</div>
+      <div class="ev cat-other" data-date="2026-10-28">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">28</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Youth</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-priests">Priests Host — 4th Wed</span></div>
+      </div>
+      <div class="ev cat-stake" data-date="2026-10-31">
+        <div class="ev-date-badge"><span class="ev-day">Sat</span><span class="ev-num">31</span></div>
+        <div class="ev-content"><div class="ev-title">Stake Primary Baptism</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-stake">Stake</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── NOVEMBER ── Teachers month -->
+  <div class="month-section">
+    <div class="month-header">
+      <span class="month-name">November</span>
+      <span class="month-line"></span>
+      <span class="month-event-count">Teachers month</span>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 1 · Nov 1–2</div>
+      <div class="ev cat-ward" data-date="2026-11-1">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">1</span></div>
+        <div class="ev-content"><div class="ev-title">Fast Sunday · Daylight Saving — Fall Back</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 1 cont. · Nov 3–8</div>
+      <div class="ev cat-other" data-date="2026-11-4">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">4</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Young Men — Earth Oven Cooking</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-teachers">Teachers Host — 1st Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 2 · Nov 9–15</div>
+      <div class="ev cat-holiday" data-date="2026-11-11">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">11</span></div>
+        <div class="ev-content"><div class="ev-title">Veterans Day — Mutual Night ???</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-holiday">Young Women Host — 2nd Wed</span></div>
+      </div>
+      <div class="ev cat-stake" data-date="2026-11-15">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">15</span></div>
+        <div class="ev-content"><div class="ev-title">Lehi Utah 3rd Stake Conference</div><div class="ev-note">Pending</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-stake">Stake</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 3 · Nov 16–22</div>
+      <div class="ev cat-deacons" data-date="2026-11-18">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">18</span></div>
+        <div class="ev-content"><div class="ev-title">Individual Quorum — Movies at the Theaters (Thanksgiving Point)</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-deacons">Deacons — 3rd Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 4 &amp; 5 · Nov 23–30</div>
+      <div class="ev cat-holiday" data-date="2026-11-25">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">25</span></div>
+        <div class="ev-content"><div class="ev-title">No Mutual Activity</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-holiday">Thanksgiving Week</span></div>
+      </div>
+      <div class="ev cat-holiday" data-date="2026-11-26">
+        <div class="ev-date-badge"><span class="ev-day">Thu</span><span class="ev-num">26</span></div>
+        <div class="ev-content"><div class="ev-title">Thanksgiving Day</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-holiday">Holiday</span></div>
+      </div>
+      <div class="ev cat-ward" data-date="2026-11-29">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">29</span></div>
+        <div class="ev-content"><div class="ev-title">5th Sunday — 2nd Hour Combined</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Ongoing · Nov–Dec</div>
+      <div class="ev cat-ward" data-date="2026-11-1">
+        <div class="ev-date-badge"><span class="ev-range">Nov–Dec</span></div>
+        <div class="ev-content"><div class="ev-title">Tithing Settlement</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DECEMBER ── Deacons host month; YM host 2nd & 4th Wed -->
+  <div class="month-section">
+    <div class="month-header">
+      <span class="month-name">December</span>
+      <span class="month-line"></span>
+      <span class="month-event-count">⚜️ Deacons month</span>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 1 · Dec 1–7</div>
+      <div class="ev cat-ward" data-date="2026-12-3">
+        <div class="ev-date-badge"><span class="ev-day">Thu</span><span class="ev-num">3</span></div>
+        <div class="ev-content"><div class="ev-title">Ward Christmas Party · 6:00–9:00 pm</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Combined Youth — 1st Week</span></div>
+      </div>
+      <div class="ev cat-stake" data-date="2026-12-5">
+        <div class="ev-date-badge"><span class="ev-day">Sat</span><span class="ev-num">5</span></div>
+        <div class="ev-content"><div class="ev-title">Stake Primary Baptism</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-stake">Stake</span></div>
+      </div>
+      <div class="ev cat-ward" data-date="2026-12-6">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">6</span></div>
+        <div class="ev-content"><div class="ev-title">Fast Sunday</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+      <div class="ev cat-church" data-date="2026-12-6">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">6</span></div>
+        <div class="ev-content"><div class="ev-title">First Presidency's Christmas Devotional</div><div class="ev-note">Pending</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-church">Church-Wide</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 2 · Dec 8–14</div>
+      <div class="ev cat-deacons-primary" data-date="2026-12-9">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">9</span></div>
+        <div class="ev-content"><div class="ev-title">Combined Youth Temple Baptism · 6:00 pm · Mt Timpanogas Temple</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-deacons">Deacons Host — 2nd Wed</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 3 · Dec 15–21</div>
+      <div class="ev cat-deacons-primary" data-date="2026-12-16">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">16</span></div>
+        <div class="ev-content"><div class="ev-title">Individual Quorum — Christmas Party</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-deacons">Deacons — 3rd Wed</span></div>
+      </div>
+      <div class="ev cat-ward" data-date="2026-12-20">
+        <div class="ev-date-badge"><span class="ev-day">Sun</span><span class="ev-num">20</span></div>
+        <div class="ev-content">
+          <div class="ev-title">Christmas Sacrament Service · 1 hour only · 10:30 am</div>
+          <div class="ev-note">2027 new Sacrament time: 12:00 pm starting Sun Jan 3</div>
+        </div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+    </div>
+
+    <div class="week-group">
+      <div class="week-label">Week 4 · Dec 22–31</div>
+      <div class="ev cat-holiday" data-date="2026-12-25">
+        <div class="ev-date-badge"><span class="ev-day">Fri</span><span class="ev-num">25</span></div>
+        <div class="ev-content"><div class="ev-title">Christmas Day</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-holiday">Holiday</span></div>
+      </div>
+      <div class="ev cat-ward" data-date="2026-12-30">
+        <div class="ev-date-badge"><span class="ev-day">Wed</span><span class="ev-num">30</span></div>
+        <div class="ev-content"><div class="ev-title">No Youth Activity — Christmas Holidays</div></div>
+        <div class="ev-tag-wrap"><span class="event-tag tag-ward">Ward</span></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <strong>Deacons Quorum · Lehi 41st Ward</strong> · Lehi Utah 3rd Stake · 2026<br/>
+  Adviser: Bro. Taukeiaho · All dates marked pending are tentative. Confirm with the bishopric.
+</footer>
+
+<script>
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  document.querySelectorAll('.ev[data-date]').forEach(ev => {
+    const parts = ev.dataset.date.split('-');
+    const evDate = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+    if (evDate < today) ev.setAttribute('data-past', '');
+  });
+</script>
+
+</body>
+</html>
